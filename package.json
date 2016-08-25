@@ -1,0 +1,15 @@
+{
+  "name": "FCC - POLLING APP",
+  "version": "1.0.0",
+  "description": "server.js is the 1st FreeCodeCamp dynamic web application project.",
+  "main": "server.js",
+  "repository": "https://github.com/burcinguzel/fcc-polling-app",
+  "author": "Purch",
+  "dependencies": {
+    "express": "~3.2.6",
+    "socket.io": "~0.9.14",
+    "mongodb": "~2.6.12",
+    "oauth": "~0.9.14",
+    "body-parser": "~1.15.2"
+  }
+}

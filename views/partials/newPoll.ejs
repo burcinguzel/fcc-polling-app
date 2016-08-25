@@ -1,0 +1,38 @@
+<div id="titleAlert" class="alert" style="background-color: #f46;display:none;" >
+  	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  		Title cannot be empty
+</div>
+<div id="optionAlert" class="alert" style="background-color: #f46;display:none;" >
+  	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  		You need an option to make a poll!
+</div>
+
+
+<div class="w3-container w3-blue-grey w3-padding-16"> 
+    <div class="w3-center w3-white" style="height: 500px;" >
+
+    <form class="w3-container" method="post" action="/newpoll" id="pollForm" >
+        <h1>Make a new poll!</h1>
+        <p>
+        <label>Title</label>
+        <input class="w3-input w3-padding" type="text" name="title" id="formTitle" >
+        </p>
+        <p>
+        <label>Options (seperated by line):</label>
+        <textarea class="w3-input w3-padding" style="height:200px;" name="options" ></textarea>
+        </p>
+        <p><input type="button" class="w3-btn w3-teal w3-hover-grey" value="Make!"  onclick="pollFormSubmit()"></p>
+    </form>
+    </div>
+</div>
+
+<script  type="text/javascript" >
+function pollFormSubmit(){
+    if(document.getElementById("formTitle").value == "")
+        document.getElementById("titleAlert").style.display="block";
+    else if(document.getElementsByTagName("textarea")[0].textLength == 0)
+        document.getElementById("optionAlert").style.display="block";
+    else
+        document.getElementById("pollForm").submit();
+}
+</script>

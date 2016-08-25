@@ -1,0 +1,14 @@
+ <ul class="w3-navbar w3-card-8 w3-teal">
+          <li><a href="/polls">Polling App</a></li>
+          <li class="w3-right w3-light-green" ><a href=<%= btnAddr %>><%= btnText %></a></li>
+          <% if(typeof btnArr != 'undefined'){ %>
+          <% for(var i=btnArr.length -1; i>=0; i--) { %>
+          <li class="w3-right" >
+            <a href='<%= btnArr[i]["second"] %>'>
+                <%= btnArr[i]["first"] %>
+            </a>
+          </li>
+          <% } %>
+          <% } %>
+          <li class="w3-right" ><a href="/polls">Home</a></li>
+ </ul>

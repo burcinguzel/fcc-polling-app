@@ -1,0 +1,126 @@
+<!-- pass variable to client javascript	-->
+<% var  myData =[]; %>
+<% var  myTitle %>
+<% myData = chartDep[0].data; %>
+<% myTitle = chartDep[0].chartTitle; %>
+
+<% if(typeof alertFlag != 'undefined'){ %>
+   <% if( alertFlag == '0') { %>
+			<div class="alert" style="background-color: #1d4;" >
+  				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  					You've voted successfully!
+			</div>
+          <% } else { %>
+          <div class="alert" style="background-color: #f46;" >
+	  		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  				Error:You can vote once a poll (user-or-ip-voted)
+			</div>           
+		  <% } %>
+          <% } %>
+			<div id="optionAlert" class="alert" style="background-color: #f46;display:none;" >
+  				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  					Choose any option
+			</div>
+			<div id="newOptionAlert" class="alert" style="background-color: #f46;display:none;" >
+  				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  					Option cannot be empty
+			</div>
+
+
+<div class="w3-container w3-blue-grey w3-padding-16 w3-row"> 
+    <div  class="w3-col s6 w3-green w3-center" >
+    <div id="chartContainer" style="height: 500px; width: 100%; backgroundColor:red;"></div>
+    </div>
+    <div class="w3-col s6 w3-center w3-white" style="height: 500px;" >
+        <form class="w3-container" action="<%= chartDep[0].pageUrl %>" method="post" id="voteForm" >
+        <h2><b>I'd like to vote for...: </b></h2>
+        <select class="w3-select" name="option" onchange="selFunc(this)">
+              <option value="" disabled selected>Choose your option</option>
+            <% if(typeof chartDep[0].data != 'undefined'){ %>
+            <% for(var i=0; i<chartDep[0].data.length; i++) { %>
+                <option value="<%= chartDep[0].data[i].name %>"><%= chartDep[0].data[i].name %></option>
+              <% } %>
+              <% if(typeof addFlag != 'undefined') { %>
+             		 <option id="custOpt">I'd like to custom option</option>
+              <% } %>
+             <% } %>
+        </select>
+        <div style="display:none" id="secretInput">
+        	<label><b>Vote with my own option:</b></label>
+        	<input type="text" class="w3-input w3-padding" name="custOpt" id="custOptText" >
+        </div>
+        <p><input type="button" class="w3-btn w3-teal w3-hover-grey" onclick="submitForm()"  value="Submit" id="newOption"></p>
+        </form>
+        <p><a href="https://twitter.com/intent/tweet?url=<%= chartDep[0].fullUrl %><%= chartDep[0].pageUrl %>&text=<%= myTitle %>%20%7C%20Polling App" class="w3-btn w3-blue w3-hover-indigo" >Share on Twitter</a></p>
+        <% if(typeof deleteFlag != 'undefined') { %>
+        <form action="<%= chartDep[0].pageUrl %>" method="post" style="margin-top:30px;">
+            <p><input type="submit" class="w3-btn w3-red w3-hover-black" value="Remove this Poll" style="width:100%;"></p>
+        </form>
+        <% } %>
+        
+    </div>
+</div>
+
+<script  type="text/javascript" >
+function selFunc(item){
+	if(item[item.selectedIndex].id == "custOpt")
+		document.getElementById("secretInput").style.display ="block";
+}
+function submitForm() {
+    if(!document.getElementsByTagName("option")[0].selected){
+    	if(document.getElementById("secretInput").style.display =="block"){
+        	if(document.getElementById("custOptText").value == "")
+       		 	document.getElementById("newOptionAlert").style.display="block";
+       		else
+       		 	document.getElementById("voteForm").submit();
+    	}else
+        document.getElementById("voteForm").submit();
+    }else
+        document.getElementById('optionAlert').style.display ="block";
+}
+
+
+ var myTemp = <%- JSON.stringify(myData) %>;
+ var myTempTitle = "<%- myTitle %>";
+
+ myDataPoints = [];
+ for( var i = 0 ; i < myTemp.length ; i++){
+ 	myDataPoints.push({  y: myTemp[i].point, legendText:myTemp[i].name, label: myTemp[i].name});
+ 	
+ }
+
+window.onload = function () {
+
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		title:{
+			text: myTempTitle
+		},
+                animationEnabled: true,
+		legend:{
+			verticalAlign: "center",
+			horizontalAlign: "left",
+			fontSize: 20,
+			fontFamily: "serif"        
+		},
+		theme: "theme2",
+		data: [
+		{        
+			type: "pie",
+			indexLabelFontFamily: "serif",       
+			indexLabelFontSize: 20,
+			indexLabelFontWeight: "bold",
+			startAngle:0,
+			indexLabelFontColor: "MistyRose",       
+			indexLabelLineColor: "darkgrey", 
+			indexLabelPlacement: "inside", 
+			toolTipContent: "{legendText}: {y}",
+			showInLegend: true,
+			indexLabel: "#percent%", 
+			dataPoints: myDataPoints
+		}
+		]
+	});
+	chart.render();
+}
+</script>

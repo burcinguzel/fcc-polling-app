@@ -1,0 +1,9 @@
+<div class="w3-container w3-blue-grey w3-padding"> 
+<h1 class="w3-margin w3-center" >VOTING APP</h1>
+<p class="w3-margin w3-center" >Select a poll to see the results and vote, or sign-in to make a new poll.</p>
+<% if(typeof bodyBtn != 'undefined'){ %>
+   <% for(var i=bodyBtn.length -1; i>=0; i--) { %>
+<a href='<%= bodyBtn[i]["addr"] %>' class="w3-btn-block w3-teal w3-hover-grey w3-margin-right " style="margin-top:1px;" ><%= bodyBtn[i]["name"] %></a>
+          <% } %>
+          <% } %>
+</div>

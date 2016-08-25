@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Voting App</title>
+    <link rel="stylesheet" href="/w3.css">
+    <script src="/canvasjs.min.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .mydiv{
+            margin-top:10%;
+        }
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+<div class="w3-container" style="margin:0% 10% 0%;">
+        <%- include('partials/navbar') %>
+        <% if(typeof voteActv == 'undefined') { %>
+             <%- include('partials/body'); %>
+        <% } else if(voteActv == "1") { %>
+             <%- include('partials/voteChart'); %>
+        <% } else { %>
+             <%- include('partials/newPoll'); %>
+        <% } %>
+
+
+ </div>
+<div class="w3-container w3-teal" style=" clear: both;position: relative; text-align:center; z-index: 10;margin:6em 11% 0%;" >
+  <p>&copy; This app is built by <a href="https://github.com/burcinguzel">Purch</a></p>
+  <p>It is the 1st dynamic web application project of <a href="https://www.freecodecamp.com">FreeCodeCamp</a></p>
+  <p>For JavaScript Charting Library, See <a href="http://canvasjs.com">CanvasJS</a>,and for CSS Library, See <a href="http://www.w3schools.com/w3css/default.asp">W3.CSS</a></p>
+  </div>
+
+</body>
+</html>
