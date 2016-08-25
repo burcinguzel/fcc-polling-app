@@ -7,8 +7,7 @@
   "author": "Purch",
   "dependencies": {
     "express": "~3.2.6",
-    "socket.io": "~0.9.14",
-    "mongodb": "~2.6.12",
+    "mongodb": "~2.2.5",
     "oauth": "~0.9.14",
     "body-parser": "~1.15.2"
   }
