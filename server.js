@@ -479,7 +479,8 @@ function updatePoll(req, res, flag) {
                         "paramNum.$.point": 1
                     },
                     $addToSet: {
-                        "votingUser": req.session.twitterUser
+                        "votingUser": req.session.twitterUser,
+                        "votingIP": ip
                     }
                 },
                 false,
