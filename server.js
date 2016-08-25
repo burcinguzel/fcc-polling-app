@@ -142,10 +142,7 @@ app.get("/polls/:id", function(req, res) {
 app.post("/polls/:id", function(req, res) {
 
     if (JSON.stringify(req.body) != "{}")
-        if (req.body.custOpt)
-            updateOption(req, res);
-        else
-            findUserorIp(req, res);
+        findUserorIp(req, res);
     else
         deletePoll(req, res);
 
@@ -574,7 +571,10 @@ function findUserorIp(req, res) {
                     }, 1);
                 }
                 else {
-                    updatePoll(req, res, false);
+                    if (req.body.custOpt)
+                        updateOption(req, res);
+                    else
+                        updatePoll(req, res, false);
                 }
             });
         }
@@ -591,7 +591,10 @@ function findUserorIp(req, res) {
                     }, 1);
                 }
                 else {
-                    updatePoll(req, res, true);
+                    if (req.body.custOpt)
+                        updateOption(req, res);
+                    else
+                        updatePoll(req, res, true);
                 }
             });
 

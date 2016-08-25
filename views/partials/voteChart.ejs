@@ -65,6 +65,8 @@
 function selFunc(item){
 	if(item[item.selectedIndex].id == "custOpt")
 		document.getElementById("secretInput").style.display ="block";
+    else
+    	document.getElementById("secretInput").style.display ="none";
 }
 function submitForm() {
     if(!document.getElementsByTagName("option")[0].selected){
