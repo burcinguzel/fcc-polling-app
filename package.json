@@ -9,7 +9,7 @@
     "express": "~3.2.6",
     "mongodb": "~2.2.5",
     "oauth": "~0.9.14",
-    "body-parser": "~1.15.2"
+    "body-parser": "~1.15.2",
     "ejs": "~2.5.1"
   }
 }
