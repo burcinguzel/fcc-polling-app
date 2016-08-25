@@ -511,13 +511,13 @@ function updatePoll(req, res, flag) {
 }
 
 function updateOption(req, res) {
-
+ var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     myDBClient.connect(myDBUrl, function(err, db) {
         if (err) {
             console.log(err);
         }
         var myCol = db.collection('pollstest');
-
+    if(!req.session.twitterUser){
         myCol.update({
                 "_id": objectId(req.params.id.toString())
             }, {
@@ -525,11 +525,27 @@ function updateOption(req, res) {
                     "paramNum": {
                         "name": req.body.custOpt,
                         "point": 1
-                    }
+                    },
+                    "votingIP": ip
                 }
             },
             false,
             true);
+    }else{
+               myCol.update({
+                "_id": objectId(req.params.id.toString())
+            }, {
+                $addToSet: {
+                    "paramNum": {
+                        "name": req.body.custOpt,
+                        "point": 1
+                    },
+                "votingUser": req.session.twitterUser
+                }
+            },
+            false,
+            true); 
+    }
         retrievePoll(req, res, {
             "_id": objectId(req.params.id.toString())
         }, 2);
