@@ -28,6 +28,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.set('view engine', 'ejs');
 
+//REDIRECTING TO HOME PAGE 
+app.get("/",function(req,res){
+    res.redirect("/polls");
+});
 //HOME PAGE 
 app.get("/polls", function(req, res) {
     retrieveAllPolls(req, res, {});

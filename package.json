@@ -1,5 +1,5 @@
 {
-  "name": "FCC - POLLING APP",
+  "name": "fcc-polling-app",
   "version": "1.0.0",
   "description": "server.js is the 1st FreeCodeCamp dynamic web application project.",
   "main": "server.js",
